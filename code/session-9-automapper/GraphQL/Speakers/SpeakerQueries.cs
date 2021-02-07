@@ -35,32 +35,40 @@ namespace ConferencePlanner.GraphQL.Speakers
             return query;
         }
 
-        [UseApplicationDbContext]
-        [UsePaging]
-        [UseProjection]
-        [UseSorting]
-
-        [UseFiltering]
-        public IQueryable<SpeakerDto> GetSpeakers2(
-        [ScopedService] ApplicationDbContext context)
-        {
-
-            var query = context.Speakers
-                .Select(x => new SpeakerDto()
-                {
-                    Name = x.Name,
-                    Id = x.Id,
-                    Sessions = x.Sessions
-                    .Select(y => new SessionDto()
-                    {
-                        Id = y.Id,
-                        Title = y.Title
-                    })
-                });
 
 
-            return query;
-        }
+
+        //[UseApplicationDbContext]
+        //[UsePaging]
+        //[UseProjection]
+        //[UseSorting]
+        //[UseFiltering]
+        //public IQueryable<SessionDto> GetSessions(
+        // [ScopedService] ApplicationDbContext context,
+        //   [Service] IMapper mapper)
+        //{
+
+        //    var query = context.Sessions
+        //           .ProjectTo<SessionDto>(mapper.ConfigurationProvider);
+
+        //    return query;
+        //}
+
+        //[UseApplicationDbContext]
+        //[UsePaging]
+        //[UseProjection]
+        //[UseSorting]
+        //[UseFiltering]
+        //public IQueryable<AttendeeDto> GetAttendees(
+        //[ScopedService] ApplicationDbContext context,
+        //  [Service] IMapper mapper)
+        //{
+
+        //    var query = context.Attendees
+        //           .ProjectTo<AttendeeDto>(mapper.ConfigurationProvider);
+
+        //    return query;
+        //}
 
 
         [UseApplicationDbContext]

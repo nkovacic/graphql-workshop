@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace ConferencePlanner.GraphQL.Data
 {
@@ -51,7 +52,11 @@ namespace ConferencePlanner.GraphQL.Data
             modelBuilder.Entity<Session>().HasData(SessionData);
 
             //modelBuilder.Entity<SessionSpeaker>().HasData(SessionSpeakerData);
-            
+
+            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("SessionSpeaker")
+                .HasData(new { SpeakersId = 1, SessionsId = 1 })
+                ;
+
         }
 
         #region seed data
