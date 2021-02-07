@@ -127,11 +127,11 @@ namespace ConferencePlanner.GraphQL.Migrations
                 columns: new[] { "Id", "EmailAddress", "FirstName", "LastName", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, "Avengers: Endgame", "LastName", "UserName" },
-                    { 2, null, "The Lion King", "LastName", "UserName" },
-                    { 3, null, "Ip Man 4", "LastName", "UserName" },
-                    { 4, null, "Gemini Man", "LastName", "UserName" },
-                    { 5, null, "Downton Abbey", "LastName", "UserName" }
+                    { 1, null, "Avengers: Endgame", "LastName", "UserName1" },
+                    { 2, null, "The Lion King", "LastName", "UserName2" },
+                    { 3, null, "Ip Man 4", "LastName", "UserName3" },
+                    { 4, null, "Gemini Man", "LastName", "UserName4" },
+                    { 5, null, "Downton Abbey", "LastName", "UserName5" }
                 });
 
             migrationBuilder.InsertData(
@@ -139,11 +139,11 @@ namespace ConferencePlanner.GraphQL.Migrations
                 columns: new[] { "Id", "Abstract", "EndTime", "StartTime", "Title", "TrackId" },
                 values: new object[,]
                 {
-                    { 6, null, null, null, "The Fresh Prince of Bel-Air", null },
-                    { 7, null, null, null, "Downton Abbey", null },
-                    { 8, null, null, null, "Stranger Things", null },
-                    { 9, null, null, null, "Kantaro: The Sweet Tooth Salaryman", null },
-                    { 10, null, null, null, "The Walking Dead", null }
+                    { 1, null, null, null, "The Fresh Prince of Bel-Air", null },
+                    { 2, null, null, null, "Downton Abbey", null },
+                    { 3, null, null, null, "Stranger Things", null },
+                    { 4, null, null, null, "Kantaro: The Sweet Tooth Salaryman", null },
+                    { 5, null, null, null, "The Walking Dead", null }
                 });
 
             migrationBuilder.InsertData(
@@ -151,11 +151,22 @@ namespace ConferencePlanner.GraphQL.Migrations
                 columns: new[] { "Id", "Bio", "Name", "WebSite" },
                 values: new object[,]
                 {
-                    { 6, null, "The Fresh Prince of Bel-Air", null },
-                    { 7, null, "Downton Abbey", null },
-                    { 8, null, "Stranger Things", null },
-                    { 9, null, "Kantaro: The Sweet Tooth Salaryman", null },
-                    { 10, null, "The Walking Dead", null }
+                    { 1, null, "The Fresh Prince of Bel-Air", null },
+                    { 2, null, "Downton Abbey", null },
+                    { 3, null, "Stranger Things", null },
+                    { 4, null, "Kantaro: The Sweet Tooth Salaryman", null },
+                    { 5, null, "The Walking Dead", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SessionSpeaker",
+                columns: new[] { "SessionId", "SpeakerId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -50,30 +50,39 @@ namespace ConferencePlanner.GraphQL.Data
 
             modelBuilder.Entity<Session>().HasData(SessionData);
 
-             
+            modelBuilder.Entity<SessionSpeaker>().HasData(SessionSpeakerData);
+            
         }
 
         #region seed data
         private Attendee[] AttendeesData = new Attendee[] {
-        new Attendee { Id = 1, FirstName = "Avengers: Endgame",LastName = "LastName",UserName = "UserName", },
-        new Attendee { Id = 2, FirstName = "The Lion King",LastName = "LastName",UserName = "UserName", },
-        new Attendee { Id = 3, FirstName = "Ip Man 4",LastName = "LastName",UserName = "UserName", },
-        new Attendee { Id = 4, FirstName = "Gemini Man",LastName = "LastName",UserName = "UserName", },
-        new Attendee { Id = 5, FirstName = "Downton Abbey",LastName = "LastName", UserName = "UserName",},
-    };
+        new Attendee { Id = 1, FirstName = "Avengers: Endgame",LastName = "LastName",UserName = "UserName1", },
+        new Attendee { Id = 2, FirstName = "The Lion King",LastName = "LastName",UserName = "UserName2", },
+        new Attendee { Id = 3, FirstName = "Ip Man 4",LastName = "LastName",UserName = "UserName3", },
+        new Attendee { Id = 4, FirstName = "Gemini Man",LastName = "LastName",UserName = "UserName4", },
+        new Attendee { Id = 5, FirstName = "Downton Abbey",LastName = "LastName", UserName = "UserName5",},
+         };
         private Speaker[] SpeakerData = new Speaker[] {
-        new Speaker { Id = 6 , Name = "The Fresh Prince of Bel-Air", },
-            new Speaker { Id = 7 , Name = "Downton Abbey", },
-            new Speaker { Id = 8 , Name = "Stranger Things", },
-            new Speaker { Id = 9 , Name = "Kantaro: The Sweet Tooth Salaryman", },
-            new Speaker { Id = 10, Name = "The Walking Dead", },    };
+            new Speaker { Id = 1 , Name = "The Fresh Prince of Bel-Air", },
+            new Speaker { Id = 2 , Name = "Downton Abbey", },
+            new Speaker { Id = 3 , Name = "Stranger Things", },
+            new Speaker { Id = 4 , Name = "Kantaro: The Sweet Tooth Salaryman", },
+            new Speaker { Id = 5, Name = "The Walking Dead", },    };
 
         private Session[] SessionData = new Session[] {
-        new Session { Id = 6 , Title = "The Fresh Prince of Bel-Air", },
-            new Session { Id = 7 , Title = "Downton Abbey", },
-            new Session { Id = 8 , Title = "Stranger Things", },
-            new Session { Id = 9 , Title = "Kantaro: The Sweet Tooth Salaryman", },
-            new Session { Id = 10, Title = "The Walking Dead", } };
+        new Session { Id = 1 , Title = "The Fresh Prince of Bel-Air", },
+            new Session { Id = 2 , Title = "Downton Abbey", },
+            new Session { Id = 3 , Title = "Stranger Things", },
+            new Session { Id = 4 , Title = "Kantaro: The Sweet Tooth Salaryman", },
+            new Session { Id = 5, Title = "The Walking Dead", } };
+
+        private SessionSpeaker[] SessionSpeakerData = new SessionSpeaker[] {
+            new SessionSpeaker { SessionId = 1 , SpeakerId = 1 },
+            new SessionSpeaker { SessionId = 2 , SpeakerId = 2 },
+            new SessionSpeaker { SessionId = 3 , SpeakerId = 3 },
+            new SessionSpeaker { SessionId = 4 , SpeakerId = 4 },
+        };
+
         #endregion
 
 

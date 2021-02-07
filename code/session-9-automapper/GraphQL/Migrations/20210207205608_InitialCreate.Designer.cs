@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConferencePlanner.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210207205232_InitialCreate")]
+    [Migration("20210207205608_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,35 +60,35 @@ namespace ConferencePlanner.GraphQL.Migrations
                             Id = 1,
                             FirstName = "Avengers: Endgame",
                             LastName = "LastName",
-                            UserName = "UserName"
+                            UserName = "UserName1"
                         },
                         new
                         {
                             Id = 2,
                             FirstName = "The Lion King",
                             LastName = "LastName",
-                            UserName = "UserName"
+                            UserName = "UserName2"
                         },
                         new
                         {
                             Id = 3,
                             FirstName = "Ip Man 4",
                             LastName = "LastName",
-                            UserName = "UserName"
+                            UserName = "UserName3"
                         },
                         new
                         {
                             Id = 4,
                             FirstName = "Gemini Man",
                             LastName = "LastName",
-                            UserName = "UserName"
+                            UserName = "UserName4"
                         },
                         new
                         {
                             Id = 5,
                             FirstName = "Downton Abbey",
                             LastName = "LastName",
-                            UserName = "UserName"
+                            UserName = "UserName5"
                         });
                 });
 
@@ -126,27 +126,27 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 6,
+                            Id = 1,
                             Title = "The Fresh Prince of Bel-Air"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 2,
                             Title = "Downton Abbey"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 3,
                             Title = "Stranger Things"
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 4,
                             Title = "Kantaro: The Sweet Tooth Salaryman"
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 5,
                             Title = "The Walking Dead"
                         });
                 });
@@ -179,6 +179,28 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.HasIndex("SpeakerId");
 
                     b.ToTable("SessionSpeaker");
+
+                    b.HasData(
+                        new
+                        {
+                            SessionId = 1,
+                            SpeakerId = 1
+                        },
+                        new
+                        {
+                            SessionId = 2,
+                            SpeakerId = 2
+                        },
+                        new
+                        {
+                            SessionId = 3,
+                            SpeakerId = 3
+                        },
+                        new
+                        {
+                            SessionId = 4,
+                            SpeakerId = 4
+                        });
                 });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Speaker", b =>
@@ -208,27 +230,27 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 6,
+                            Id = 1,
                             Name = "The Fresh Prince of Bel-Air"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 2,
                             Name = "Downton Abbey"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 3,
                             Name = "Stranger Things"
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 4,
                             Name = "Kantaro: The Sweet Tooth Salaryman"
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 5,
                             Name = "The Walking Dead"
                         });
                 });
