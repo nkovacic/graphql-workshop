@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConferencePlanner.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210207144840_initial")]
-    partial class initial
+    [Migration("20210207205232_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,43 @@ namespace ConferencePlanner.GraphQL.Migrations
                         .IsUnique();
 
                     b.ToTable("Attendees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Avengers: Endgame",
+                            LastName = "LastName",
+                            UserName = "UserName"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "The Lion King",
+                            LastName = "LastName",
+                            UserName = "UserName"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Ip Man 4",
+                            LastName = "LastName",
+                            UserName = "UserName"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Gemini Man",
+                            LastName = "LastName",
+                            UserName = "UserName"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Downton Abbey",
+                            LastName = "LastName",
+                            UserName = "UserName"
+                        });
                 });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Session", b =>
@@ -85,6 +122,33 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.HasIndex("TrackId");
 
                     b.ToTable("Sessions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 6,
+                            Title = "The Fresh Prince of Bel-Air"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Title = "Downton Abbey"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Title = "Stranger Things"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Title = "Kantaro: The Sweet Tooth Salaryman"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Title = "The Walking Dead"
+                        });
                 });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.SessionAttendee", b =>
@@ -140,6 +204,33 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Speakers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 6,
+                            Name = "The Fresh Prince of Bel-Air"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Downton Abbey"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Stranger Things"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Kantaro: The Sweet Tooth Salaryman"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "The Walking Dead"
+                        });
                 });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Track", b =>

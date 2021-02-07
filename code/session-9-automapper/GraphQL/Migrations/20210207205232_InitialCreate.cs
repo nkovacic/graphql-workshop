@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConferencePlanner.GraphQL.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,6 +120,42 @@ namespace ConferencePlanner.GraphQL.Migrations
                         principalTable: "Speakers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Attendees",
+                columns: new[] { "Id", "EmailAddress", "FirstName", "LastName", "UserName" },
+                values: new object[,]
+                {
+                    { 1, null, "Avengers: Endgame", "LastName", "UserName" },
+                    { 2, null, "The Lion King", "LastName", "UserName" },
+                    { 3, null, "Ip Man 4", "LastName", "UserName" },
+                    { 4, null, "Gemini Man", "LastName", "UserName" },
+                    { 5, null, "Downton Abbey", "LastName", "UserName" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sessions",
+                columns: new[] { "Id", "Abstract", "EndTime", "StartTime", "Title", "TrackId" },
+                values: new object[,]
+                {
+                    { 6, null, null, null, "The Fresh Prince of Bel-Air", null },
+                    { 7, null, null, null, "Downton Abbey", null },
+                    { 8, null, null, null, "Stranger Things", null },
+                    { 9, null, null, null, "Kantaro: The Sweet Tooth Salaryman", null },
+                    { 10, null, null, null, "The Walking Dead", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Speakers",
+                columns: new[] { "Id", "Bio", "Name", "WebSite" },
+                values: new object[,]
+                {
+                    { 6, null, "The Fresh Prince of Bel-Air", null },
+                    { 7, null, "Downton Abbey", null },
+                    { 8, null, "Stranger Things", null },
+                    { 9, null, "Kantaro: The Sweet Tooth Salaryman", null },
+                    { 10, null, "The Walking Dead", null }
                 });
 
             migrationBuilder.CreateIndex(

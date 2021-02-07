@@ -29,7 +29,7 @@ namespace ConferencePlanner.GraphQL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPooledDbContextFactory<ApplicationDbContext>(
-                 //options => options.UseSqlite("Data Source=conferences.db"))
+
                  options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ContosoUniversity1;Trusted_Connection=True;MultipleActiveResultSets=true")
                   )
 
@@ -40,6 +40,7 @@ namespace ConferencePlanner.GraphQL
             {
                 mc.AddProfile(new MappingProfile());
             });
+
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);

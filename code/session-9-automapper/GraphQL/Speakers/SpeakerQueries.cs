@@ -31,6 +31,8 @@ namespace ConferencePlanner.GraphQL.Speakers
             var query = context.Speakers
                    .ProjectTo<SpeakerDto>(mapper.ConfigurationProvider);
 
+            var expression = query.Expression;
+
             return query;
         }
 

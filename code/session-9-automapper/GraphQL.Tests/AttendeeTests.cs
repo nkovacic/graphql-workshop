@@ -18,40 +18,19 @@ namespace GraphQL.Tests
 {
     public class AttendeeTests
     {
-        [Fact]
-        public async Task Attendee_Schema_Changed()
-        {
-            // arrange
-            // act
-            ISchema schema = await new ServiceCollection()
-                .AddPooledDbContextFactory<ApplicationDbContext>(
-                    options => options.UseInMemoryDatabase("Data Source=conferences.db"))
-                .AddGraphQL()
-                .AddQueryType(d => d.Name("Query"))
-                    .AddTypeExtension<AttendeeQueries>()
-                .AddMutationType(d => d.Name("Mutation"))
-                    .AddTypeExtension<AttendeeMutations>()
-                .AddType<AttendeeType>()
-                .AddType<SessionType>()
-                .AddType<SpeakerType>()
-                .AddType<TrackType>()
-                .EnableRelaySupport()
-                .BuildSchemaAsync();
-
-            // assert
-            schema.Print().MatchSnapshot();
-        }
+        
 
         [Fact]
-        public async Task RegisterAttendee()
+        public async Task GetSpeakers()
         {
             // arrange
             IRequestExecutor executor = await new ServiceCollection()
                 .AddPooledDbContextFactory<ApplicationDbContext>(
-                    options => options.UseSqlServer("Data Source=conferences.db"))
+                     options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ContosoUniversity1;Trusted_Connection=True;MultipleActiveResultSets=true")
+                      )
                 .AddGraphQL()
-               .AddQueryType(d => d.Name("Query"))
-                   .AddTypeExtension<AttendeeQueries>() 
+               .AddQueryType(d => d.Name("Query")) 
+                    .AddTypeExtension<SpeakerQueries>()
                .AddType<AttendeeType>()
                .AddType<SessionType>()
                .AddType<SpeakerType>()
@@ -61,19 +40,17 @@ namespace GraphQL.Tests
 
             // act
             IExecutionResult result = await executor.ExecuteAsync(@"
-                query RegisterAttendee {
-                    registerAttendee(
-                        input: {
-                            emailAddress: ""michael@chillicream.com""
-                                firstName: ""michael""
-                                lastName: ""staib""
-                                userName: ""michael3""
-                            })
-                    {
-                        attendee {
-                            id
+                query {
+                  speakers{
+                    nodes{
+                      id
+                      sessionSpeakers{
+                        session{
+                          id
                         }
+                      }
                     }
+                  }
                 }");
 
             // assert
