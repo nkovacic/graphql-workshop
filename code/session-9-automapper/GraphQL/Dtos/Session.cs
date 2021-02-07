@@ -8,11 +8,8 @@ namespace ConferencePlanner.GraphQL.Data
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(200)]
         public string? Title { get; set; }
 
-        [StringLength(4000)]
         public string? Abstract { get; set; }
 
         public DateTimeOffset? StartTime { get; set; }
@@ -26,12 +23,10 @@ namespace ConferencePlanner.GraphQL.Data
 
         public int? TrackId { get; set; }
 
-        public ICollection<SessionSpeakerDto> SessionSpeakers { get; set; } =
-            new List<SessionSpeakerDto>();
+        public ICollection<SpeakerDto> Speakers { get; set; } = new List<SpeakerDto>();
 
-        public ICollection<SessionAttendeeDto> SessionAttendees { get; set; } =
-            new List<SessionAttendeeDto>();
+        //public ICollection<AttendeeDto> Attendees { get; set; } = new List<AttendeeDto>();
 
-        public Track? Track { get; set; }
+        public TrackDto? Track { get; set; }
     }
 }

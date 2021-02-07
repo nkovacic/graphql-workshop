@@ -1,14 +1,8 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ConferencePlanner.GraphQL;
-using ConferencePlanner.GraphQL.Attendees;
 using ConferencePlanner.GraphQL.Data;
-using ConferencePlanner.GraphQL.Sessions;
 using ConferencePlanner.GraphQL.Speakers;
-using ConferencePlanner.GraphQL.Tracks;
-using ConferencePlanner.GraphQL.Types;
 using HotChocolate;
 using HotChocolate.Execution;
 using Snapshooter.Xunit;
@@ -31,10 +25,10 @@ namespace GraphQL.Tests
                 .AddGraphQL()
                .AddQueryType(d => d.Name("Query")) 
                     .AddTypeExtension<SpeakerQueries>()
-               .AddType<AttendeeType>()
-               .AddType<SessionType>()
-               .AddType<SpeakerType>()
-               .AddType<TrackType>()
+               //.AddType<AttendeeType>()
+               //.AddType<SessionType>()
+               //.AddType<SpeakerType>()
+               //.AddType<TrackType>()
                .EnableRelaySupport()
                .BuildRequestExecutorAsync();
 

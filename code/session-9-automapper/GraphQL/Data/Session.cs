@@ -26,11 +26,11 @@ namespace ConferencePlanner.GraphQL.Data
 
         public int? TrackId { get; set; }
 
-        public ICollection<SessionSpeaker> SessionSpeakers { get; set; } =
-            new List<SessionSpeaker>();
+        public ICollection<Speaker> Speakers { get; set; } =
+            new List<Speaker>();
 
-        public ICollection<SessionAttendee> SessionAttendees { get; set; } =
-            new List<SessionAttendee>();
+        public ICollection<Attendee> Attendees { get; set; } =
+            new List<Attendee>();
 
         public Track? Track { get; set; }
     }

@@ -75,24 +75,24 @@ namespace ConferencePlanner.GraphQL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SessionAttendee",
+                name: "AttendeeSession",
                 columns: table => new
                 {
-                    SessionId = table.Column<int>(type: "int", nullable: false),
-                    AttendeeId = table.Column<int>(type: "int", nullable: false)
+                    AttendeesId = table.Column<int>(type: "int", nullable: false),
+                    SessionsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SessionAttendee", x => new { x.SessionId, x.AttendeeId });
+                    table.PrimaryKey("PK_AttendeeSession", x => new { x.AttendeesId, x.SessionsId });
                     table.ForeignKey(
-                        name: "FK_SessionAttendee_Attendees_AttendeeId",
-                        column: x => x.AttendeeId,
+                        name: "FK_AttendeeSession_Attendees_AttendeesId",
+                        column: x => x.AttendeesId,
                         principalTable: "Attendees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SessionAttendee_Sessions_SessionId",
-                        column: x => x.SessionId,
+                        name: "FK_AttendeeSession_Sessions_SessionsId",
+                        column: x => x.SessionsId,
                         principalTable: "Sessions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -102,21 +102,21 @@ namespace ConferencePlanner.GraphQL.Migrations
                 name: "SessionSpeaker",
                 columns: table => new
                 {
-                    SessionId = table.Column<int>(type: "int", nullable: false),
-                    SpeakerId = table.Column<int>(type: "int", nullable: false)
+                    SessionsId = table.Column<int>(type: "int", nullable: false),
+                    SpeakersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SessionSpeaker", x => new { x.SessionId, x.SpeakerId });
+                    table.PrimaryKey("PK_SessionSpeaker", x => new { x.SessionsId, x.SpeakersId });
                     table.ForeignKey(
-                        name: "FK_SessionSpeaker_Sessions_SessionId",
-                        column: x => x.SessionId,
+                        name: "FK_SessionSpeaker_Sessions_SessionsId",
+                        column: x => x.SessionsId,
                         principalTable: "Sessions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SessionSpeaker_Speakers_SpeakerId",
-                        column: x => x.SpeakerId,
+                        name: "FK_SessionSpeaker_Speakers_SpeakersId",
+                        column: x => x.SpeakersId,
                         principalTable: "Speakers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -158,17 +158,6 @@ namespace ConferencePlanner.GraphQL.Migrations
                     { 5, null, "The Walking Dead", null }
                 });
 
-            migrationBuilder.InsertData(
-                table: "SessionSpeaker",
-                columns: new[] { "SessionId", "SpeakerId" },
-                values: new object[,]
-                {
-                    { 1, 1 },
-                    { 2, 2 },
-                    { 3, 3 },
-                    { 4, 4 }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Attendees_UserName",
                 table: "Attendees",
@@ -176,9 +165,9 @@ namespace ConferencePlanner.GraphQL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SessionAttendee_AttendeeId",
-                table: "SessionAttendee",
-                column: "AttendeeId");
+                name: "IX_AttendeeSession_SessionsId",
+                table: "AttendeeSession",
+                column: "SessionsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_TrackId",
@@ -186,15 +175,15 @@ namespace ConferencePlanner.GraphQL.Migrations
                 column: "TrackId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SessionSpeaker_SpeakerId",
+                name: "IX_SessionSpeaker_SpeakersId",
                 table: "SessionSpeaker",
-                column: "SpeakerId");
+                column: "SpeakersId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SessionAttendee");
+                name: "AttendeeSession");
 
             migrationBuilder.DropTable(
                 name: "SessionSpeaker");

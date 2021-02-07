@@ -9,8 +9,7 @@ namespace GrowFlow.Domain.Dto.Mappings
         {
 
             CreateMap<Speaker, SpeakerDto>()
-                //.ForMember(p => p.FlowerWeight, o => o.MapFrom(s => s.Weight))
-
+                //.ForMember(p => p.FlowerWeight, o => o.MapFrom(s => s.Weight)) 
                 ;
 
             CreateMap<Attendee, AttendeeDto>()
@@ -20,13 +19,7 @@ namespace GrowFlow.Domain.Dto.Mappings
                   
             CreateMap<Session, SessionDto>()
                ;
-
-            CreateMap<SessionAttendee, SessionAttendeeDto>()
-            ;
-
-            CreateMap<SessionSpeaker, SessionSpeakerDto>()
-           ;
-
+  
             CreateMap<Track, TrackDto>()
            ;
         }

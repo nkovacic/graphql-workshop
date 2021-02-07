@@ -1,21 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using ConferencePlanner.GraphQL;
-using ConferencePlanner.GraphQL.Attendees;
 using ConferencePlanner.GraphQL.Data;
-using ConferencePlanner.GraphQL.DataLoader;
-using ConferencePlanner.GraphQL.Sessions;
-using ConferencePlanner.GraphQL.Speakers;
-using ConferencePlanner.GraphQL.Tracks;
-using ConferencePlanner.GraphQL.Types;
+using ConferencePlanner.GraphQL.Speakers; 
 using GrowFlow.Domain.Dto.Mappings;
+using HotChocolate.Types.Pagination;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,30 +37,36 @@ namespace ConferencePlanner.GraphQL
             services
                 .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
-                    .AddTypeExtension<AttendeeQueries>()
+                    //.AddTypeExtension<AttendeeQueries>()
                     .AddTypeExtension<SpeakerQueries>()
-                    .AddTypeExtension<SessionQueries>()
-                    .AddTypeExtension<TrackQueries>()
+                    //.AddTypeExtension<SessionQueries>()
+                    //.AddTypeExtension<TrackQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
-                    .AddTypeExtension<AttendeeMutations>()
-                    .AddTypeExtension<SessionMutations>()
+                    //.AddTypeExtension<AttendeeMutations>()
+                    //.AddTypeExtension<SessionMutations>()
                     .AddTypeExtension<SpeakerMutations>()
-                    .AddTypeExtension<TrackMutations>()
+                    //.AddTypeExtension<TrackMutations>()
                 //.AddSubscriptionType(d => d.Name("Subscription"))
                 //    .AddTypeExtension<AttendeeSubscriptions>()
                 //    .AddTypeExtension<SessionSubscriptions>()
-                .AddType<AttendeeType>()
-                .AddType<SessionType>()
-                .AddType<SpeakerType>()
-                .AddType<TrackType>()
+                //.AddType<AttendeeType>()
+                //.AddType<SessionType>()
+                //.AddType<SpeakerType>()
+                //.AddType<TrackType>()
                 //.EnableRelaySupport()
                 .AddFiltering()
                 .AddSorting()
                 .AddProjections()
-                ////.AddInMemorySubscriptions()
-                //.AddDataLoader<SpeakerByIdDataLoader>()
-                //.AddDataLoader<SessionByIdDataLoader>()
-                ;
+                .SetPagingOptions(new PagingOptions()
+                {
+                    MaxPageSize = 500,
+                    DefaultPageSize = 100,
+                    IncludeTotalCount = true
+                });
+            ////.AddInMemorySubscriptions()
+            //.AddDataLoader<SpeakerByIdDataLoader>()
+            //.AddDataLoader<SessionByIdDataLoader>()
+            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

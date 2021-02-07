@@ -22,7 +22,7 @@ namespace ConferencePlanner.GraphQL.Data
         [StringLength(256)]
         public string? EmailAddress { get; set; }
 
-        public ICollection<SessionAttendeeDto> SessionsAttendees { get; set; } =
-            new List<SessionAttendeeDto>();
+        public ICollection<SessionDto> Sessions { get; set; } =
+            new List<SessionDto>();
     }
 }

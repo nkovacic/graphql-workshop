@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConferencePlanner.GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210207205608_InitialCreate")]
+    [Migration("20210207224611_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,21 @@ namespace ConferencePlanner.GraphQL.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
+
+            modelBuilder.Entity("AttendeeSession", b =>
+                {
+                    b.Property<int>("AttendeesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AttendeesId", "SessionsId");
+
+                    b.HasIndex("SessionsId");
+
+                    b.ToTable("AttendeeSession");
+                });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Attendee", b =>
                 {
@@ -151,58 +166,6 @@ namespace ConferencePlanner.GraphQL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.SessionAttendee", b =>
-                {
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttendeeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SessionId", "AttendeeId");
-
-                    b.HasIndex("AttendeeId");
-
-                    b.ToTable("SessionAttendee");
-                });
-
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.SessionSpeaker", b =>
-                {
-                    b.Property<int>("SessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SpeakerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SessionId", "SpeakerId");
-
-                    b.HasIndex("SpeakerId");
-
-                    b.ToTable("SessionSpeaker");
-
-                    b.HasData(
-                        new
-                        {
-                            SessionId = 1,
-                            SpeakerId = 1
-                        },
-                        new
-                        {
-                            SessionId = 2,
-                            SpeakerId = 2
-                        },
-                        new
-                        {
-                            SessionId = 3,
-                            SpeakerId = 3
-                        },
-                        new
-                        {
-                            SessionId = 4,
-                            SpeakerId = 4
-                        });
-                });
-
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Speaker", b =>
                 {
                     b.Property<int>("Id")
@@ -272,6 +235,36 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.ToTable("Tracks");
                 });
 
+            modelBuilder.Entity("SessionSpeaker", b =>
+                {
+                    b.Property<int>("SessionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpeakersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SessionsId", "SpeakersId");
+
+                    b.HasIndex("SpeakersId");
+
+                    b.ToTable("SessionSpeaker");
+                });
+
+            modelBuilder.Entity("AttendeeSession", b =>
+                {
+                    b.HasOne("ConferencePlanner.GraphQL.Data.Attendee", null)
+                        .WithMany()
+                        .HasForeignKey("AttendeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ConferencePlanner.GraphQL.Data.Session", null)
+                        .WithMany()
+                        .HasForeignKey("SessionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Session", b =>
                 {
                     b.HasOne("ConferencePlanner.GraphQL.Data.Track", "Track")
@@ -281,59 +274,19 @@ namespace ConferencePlanner.GraphQL.Migrations
                     b.Navigation("Track");
                 });
 
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.SessionAttendee", b =>
+            modelBuilder.Entity("SessionSpeaker", b =>
                 {
-                    b.HasOne("ConferencePlanner.GraphQL.Data.Attendee", "Attendee")
-                        .WithMany("SessionsAttendees")
-                        .HasForeignKey("AttendeeId")
+                    b.HasOne("ConferencePlanner.GraphQL.Data.Session", null)
+                        .WithMany()
+                        .HasForeignKey("SessionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConferencePlanner.GraphQL.Data.Session", "Session")
-                        .WithMany("SessionAttendees")
-                        .HasForeignKey("SessionId")
+                    b.HasOne("ConferencePlanner.GraphQL.Data.Speaker", null)
+                        .WithMany()
+                        .HasForeignKey("SpeakersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Attendee");
-
-                    b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.SessionSpeaker", b =>
-                {
-                    b.HasOne("ConferencePlanner.GraphQL.Data.Session", "Session")
-                        .WithMany("SessionSpeakers")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ConferencePlanner.GraphQL.Data.Speaker", "Speaker")
-                        .WithMany("SessionSpeakers")
-                        .HasForeignKey("SpeakerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
-
-                    b.Navigation("Speaker");
-                });
-
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Attendee", b =>
-                {
-                    b.Navigation("SessionsAttendees");
-                });
-
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Session", b =>
-                {
-                    b.Navigation("SessionAttendees");
-
-                    b.Navigation("SessionSpeakers");
-                });
-
-            modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Speaker", b =>
-                {
-                    b.Navigation("SessionSpeakers");
                 });
 
             modelBuilder.Entity("ConferencePlanner.GraphQL.Data.Track", b =>

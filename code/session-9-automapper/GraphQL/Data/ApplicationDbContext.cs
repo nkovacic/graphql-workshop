@@ -29,14 +29,14 @@ namespace ConferencePlanner.GraphQL.Data
 
 
             // Many-to-many: Session <-> Attendee
-            modelBuilder
-                .Entity<SessionAttendee>()
-                .HasKey(ca => new { ca.SessionId, ca.AttendeeId });
+            //modelBuilder
+            //    .Entity<SessionAttendee>()
+            //    .HasKey(ca => new { ca.SessionId, ca.AttendeeId });
 
-            // Many-to-many: Speaker <-> Session
-            modelBuilder
-                .Entity<SessionSpeaker>()
-                .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
+            //// Many-to-many: Speaker <-> Session
+            //modelBuilder
+            //    .Entity<SessionSpeaker>()
+            //    .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
 
             SeedData(modelBuilder);
         }
@@ -50,7 +50,7 @@ namespace ConferencePlanner.GraphQL.Data
 
             modelBuilder.Entity<Session>().HasData(SessionData);
 
-            modelBuilder.Entity<SessionSpeaker>().HasData(SessionSpeakerData);
+            //modelBuilder.Entity<SessionSpeaker>().HasData(SessionSpeakerData);
             
         }
 
@@ -70,18 +70,18 @@ namespace ConferencePlanner.GraphQL.Data
             new Speaker { Id = 5, Name = "The Walking Dead", },    };
 
         private Session[] SessionData = new Session[] {
-        new Session { Id = 1 , Title = "The Fresh Prince of Bel-Air", },
+            new Session { Id = 1 , Title = "The Fresh Prince of Bel-Air", },
             new Session { Id = 2 , Title = "Downton Abbey", },
             new Session { Id = 3 , Title = "Stranger Things", },
             new Session { Id = 4 , Title = "Kantaro: The Sweet Tooth Salaryman", },
             new Session { Id = 5, Title = "The Walking Dead", } };
 
-        private SessionSpeaker[] SessionSpeakerData = new SessionSpeaker[] {
-            new SessionSpeaker { SessionId = 1 , SpeakerId = 1 },
-            new SessionSpeaker { SessionId = 2 , SpeakerId = 2 },
-            new SessionSpeaker { SessionId = 3 , SpeakerId = 3 },
-            new SessionSpeaker { SessionId = 4 , SpeakerId = 4 },
-        };
+        //private SessionSpeaker[] SessionSpeakerData = new SessionSpeaker[] {
+        //    new SessionSpeaker { SessionId = 1 , SpeakerId = 1 },
+        //    new SessionSpeaker { SessionId = 2 , SpeakerId = 2 },
+        //    new SessionSpeaker { SessionId = 3 , SpeakerId = 3 },
+        //    new SessionSpeaker { SessionId = 4 , SpeakerId = 4 },
+        //};
 
         #endregion
 
