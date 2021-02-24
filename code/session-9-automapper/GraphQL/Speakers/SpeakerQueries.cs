@@ -1,16 +1,10 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using ConferencePlanner.GraphQL.Data;
+using ConferencePlanner.GraphQL.Extensions;
 //using ConferencePlanner.GraphQL.DataLoader;
 using HotChocolate;
-using HotChocolate.Types;
-using HotChocolate.Types.Relay;
-using System.Linq;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using HotChocolate.Data;
+using HotChocolate.Types;
+using System.Linq;
 
 namespace ConferencePlanner.GraphQL.Speakers
 {
@@ -20,19 +14,10 @@ namespace ConferencePlanner.GraphQL.Speakers
 
 
         [UseApplicationDbContext]
-        [UsePaging]
-        [UseProjection]
-        [UseSorting]
-        [UseFiltering]
-        public IQueryable<SpeakerDto> GetSpeakers(
-          [ScopedService] ApplicationDbContext context,
-            [Service] IMapper mapper)
+        [UseAutomapperProjection(typeof(SpeakerDto))]
+        public IQueryable<Speaker> GetSpeakers([ScopedService] ApplicationDbContext context)
         {
-
-            var query = context.Speakers
-                   .ProjectTo<SpeakerDto>(mapper.ConfigurationProvider);
-
-            return query;
+            return context.Speakers;
         }
 
 
