@@ -1,3 +1,5 @@
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using ConferencePlanner.GraphQL.Data;
 using ConferencePlanner.GraphQL.Extensions;
 //using ConferencePlanner.GraphQL.DataLoader;
@@ -11,17 +13,22 @@ namespace ConferencePlanner.GraphQL.Speakers
     [ExtendObjectType(Name = "Query")]
     public class SpeakerQueries
     {
-
-
         [UseApplicationDbContext]
         [UseAutomapperProjection(typeof(SpeakerDto))]
-        public IQueryable<Speaker> GetSpeakers([ScopedService] ApplicationDbContext context)
+        [UseFirstOrDefault]
+        public IQueryable<Speaker> GetSpeaker([ScopedService] ApplicationDbContext context)
         {
             return context.Speakers;
         }
 
 
-
+        [UseApplicationDbContext]
+        //[UseAutomapperProjection(typeof(SpeakerDto))]
+        [UseFirstOrDefault]
+        public IQueryable<SpeakerDto> GetSpeakerNormal([ScopedService] ApplicationDbContext context, [Service]IMapper mapper)
+        {
+            return context.Speakers.ProjectTo<SpeakerDto>(mapper.ConfigurationProvider);
+        }
 
         //[UseApplicationDbContext]
         //[UsePaging]

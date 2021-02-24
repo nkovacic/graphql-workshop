@@ -4,6 +4,7 @@ using HotChocolate.Types;
 using HotChocolate.Types.Descriptors;
 using HotChocolate.Types.Descriptors.Definitions;
 using System;
+using System.Linq;
 
 namespace ConferencePlanner.GraphQL.Extensions
 {
@@ -45,9 +46,16 @@ namespace ConferencePlanner.GraphQL.Extensions
                                 nameof(descriptor));
                         }
 
+                        if (!typeof(IQueryable).IsAssignableFrom(definition.ResultType))
+                        {
+                            throw new ArgumentException(
+                                $"Cannot handle the specified type `{definition.ResultType.FullName}`.",
+                                nameof(descriptor));
+                        }
+
                         Type selectionType = typeInfo.NamedType;
-                        definition.ResultType = objectType;
-                        definition.Type = context.TypeInspector.GetTypeRef(objectType);
+                        definition.ResultType = typeof(IQueryable<>).MakeGenericType(objectType);
+                        definition.Type = context.TypeInspector.GetTypeRef(definition.ResultType);
 
                         ILazyTypeConfiguration lazyConfiguration =
                             LazyTypeConfigurationBuilder
